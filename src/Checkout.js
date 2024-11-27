@@ -9,7 +9,7 @@ function Checkout() {
     title: "The Lean Startup",
     price: 19.99,
     rating: 4,
-    image: '"https://example.com/product-image.jpg',
+    image: "https://example.com/product-image.jpg",
   };
   return (
     <div className="checkout">
