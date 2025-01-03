@@ -2,12 +2,39 @@
 
 import React, { useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import StorefrontIcon from "@material-ui/icons/Storefront";
+import { auth } from "./Firebase";
 
 function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const signIn = (e) => {
+    //e - event that will take place after sign in button is clicked
+    e.preventDefault();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((auth) => {
+        //redirects to homepgae
+        history.push("/");
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  const register = (e) => {
+    //e - event that will take place after sign in button is clicked
+    e.preventDefault();
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        if (auth) {
+          history.push("/");
+        }
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <div className="login">
@@ -36,7 +63,11 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit" className="login__signInButton">
+          <button
+            type="submit"
+            className="login__signInButton"
+            onClick={signIn}
+          >
             Sign In
           </button>
         </form>
@@ -47,7 +78,7 @@ function Login() {
           Interest-Based Ads Notice.
         </p>
 
-        <button className="login__registerButton">
+        <button className="login__registerButton" onClick={register}>
           Create your eShop Account
         </button>
       </div>
