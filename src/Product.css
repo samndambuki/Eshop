@@ -1,3 +1,5 @@
+/** @format */
+
 .product {
   display: flex;
   flex-direction: column;
@@ -8,6 +10,7 @@
   width: 100%;
   max-height: 400px;
   min-width: 100px;
+  max-width: 350px;
   background-color: white;
   z-index: 1;
 }
